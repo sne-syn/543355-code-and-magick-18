@@ -66,11 +66,12 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = randomPlayerColorBar;
     }
 
-    ctx.fillRect(barLeftStartPoint + barWidth * i, cloudBottomEdge - (BAR_HEIGHT * times[i] / maxTime + 40) , BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);
+    var barHeightCalculated = BAR_HEIGHT * times[i] / maxTime;
+
+    ctx.fillRect(barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + CHART_MARGIN) , BAR_WIDTH, barHeightCalculated);
     ctx.fillStyle = TEXT_COLOR;
     ctx.fillText(names[i], barLeftStartPoint + barWidth * i, cloudBottomEdge - namesGap);
-    ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - ((BAR_HEIGHT * times[i] / maxTime) + (BAR_HEIGHT * times[i] / maxTime)));
-    // ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - ((BAR_HEIGHT * times[i]) / maxTime));
+    ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + 60));
   }
 };
 
