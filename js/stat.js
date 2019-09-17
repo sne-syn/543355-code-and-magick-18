@@ -75,22 +75,25 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(names[i], barLeftStartPoint + barWidth * i, cloudBottomEdge - namesGap);
     ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + 60));
 
-    // Перемещает в массиве результаты текущего игрока. Работает плохо
-
-    console.log(names);
-    console.log(times);
-    var indexName = names.indexOf('Вы');
-    console.log(indexName);
-    var indexResult = times[indexName];
-    console.log(indexResult);
-
-      var swapName = names[0];
-      names[0] = names[indexName];
-      names[indexName] = swapName;
-
-      var swapTime = times[0];
-      times[0] = times[indexResult];
-      times[indexResult] = swapTime;
 
   }
+
+      // Перемещает в массиве результаты текущего игрока. Работает плохо
+
+      console.log(names);
+      console.log(times);
+      var indexName = names.indexOf('Вы');
+      console.log(indexName);
+      var indexResult = times[indexName];
+      console.log(indexResult);
+
+        var swapName = names[0];
+        names[0] = names[indexName];
+        names[indexName] = swapName;
+        console.log(names[indexName]);
+
+        var swapTime = times[0];
+        times[0] = times[indexName];
+        times[indexName] = swapTime;
+
 };
