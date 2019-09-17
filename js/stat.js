@@ -6,19 +6,18 @@ var SHADOW_GAP = 10;
 var BORDER_COLOR = 'rgb(0, 0, 0)';
 var TEXT_COLOR = 'rgb(0, 0, 0)';
 var GREETING_TEXT_X = 120;
-
 var CHART_MARGIN = 40;
-// 150px = 100%
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
 var BAR_MARGIN = 50;
 var GAP = 10;
+
 var barWidth = BAR_MARGIN + BAR_WIDTH;
 var barLeftStartPoint = CLOUD_X + CHART_MARGIN;
-// var barBottomStartPoint = BAR_HEIGHT + BAR_MARGIN;
 var cloudBottomEdge = CLOUD_Y + CLOUD_HEIGHT;
 var namesGap = GAP * 3;
-var mainPlayerColorBar = 'rgba(255, 0, 0, 1)';
+var currentPlayerColorBar = 'rgba(255, 0, 0, 1)';
+// Случайная насыщенность max = 90%, min = 10%, иначе слишком светло/темно
 var randomPlayerColorBar = 'hsl(237, 91%, ' + Math.floor(Math.random() * 80 + 10) + '%)';
 
 var renderCloud = function (ctx, x, y, color, borderColor) {
@@ -57,16 +56,17 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = getMaxElement(times);
 
+  // Определяет цвет для столбцов
+
   for (var i = 0; i < names.length; i++) {
 
-    // Случайная насыщенность max = 90%, min = 10%, иначе слишком светло/темно
     if (i === 0) {
-      ctx.fillStyle = mainPlayerColorBar;
+      ctx.fillStyle = currentPlayerColorBar;
     } else {
       ctx.fillStyle = randomPlayerColorBar;
     }
 
-
+  // высчитывает высоту стобцов
 
     var barHeightCalculated = BAR_HEIGHT * times[i] / maxTime;
 
@@ -75,19 +75,14 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(names[i], barLeftStartPoint + barWidth * i, cloudBottomEdge - namesGap);
     ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + 60));
 
+    // Перемещает в массиве результаты текущего игрока
+
     console.log(names);
     console.log(times);
     var indexName = names.indexOf('Вы');
     console.log(indexName);
     var indexResult = times[indexName];
     console.log(indexResult);
-
   }
 
 };
-
-
-// for (var i = 1; i < names.length; i++) {
-//   var randomColorBar = 'hsl(237, 91%, ' + Math.floor(Math.random()* 80 + 10) + '%)';
-//   console.log(randomColorBar);
-// }
