@@ -57,22 +57,33 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = getMaxElement(times);
 
-  // Случайная насыщенность max = 90%, min = 10%, иначе слишком светло/темно
-
   for (var i = 0; i < names.length; i++) {
+
+    // Случайная насыщенность max = 90%, min = 10%, иначе слишком светло/темно
     if (i === 0) {
       ctx.fillStyle = mainPlayerColorBar;
     } else {
       ctx.fillStyle = randomPlayerColorBar;
     }
 
+
+
     var barHeightCalculated = BAR_HEIGHT * times[i] / maxTime;
 
-    ctx.fillRect(barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + CHART_MARGIN) , BAR_WIDTH, barHeightCalculated);
+    ctx.fillRect(barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + CHART_MARGIN), BAR_WIDTH, barHeightCalculated);
     ctx.fillStyle = TEXT_COLOR;
     ctx.fillText(names[i], barLeftStartPoint + barWidth * i, cloudBottomEdge - namesGap);
     ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + 60));
+
+    console.log(names);
+    console.log(times);
+    var indexName = names.indexOf('Вы');
+    console.log(indexName);
+    var indexResult = times[indexName];
+    console.log(indexResult);
+
   }
+
 };
 
 
