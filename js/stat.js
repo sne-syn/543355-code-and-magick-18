@@ -66,7 +66,7 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = randomPlayerColorBar;
     }
 
-  // высчитывает высоту столбцов
+    // высчитывает высоту столбцов
 
     var barHeightCalculated = BAR_HEIGHT * times[i] / maxTime;
 
@@ -78,22 +78,25 @@ window.renderStatistics = function (ctx, names, times) {
 
   }
 
-      // Перемещает в массиве результаты текущего игрока. Работает плохо
+  // Перемещает в массиве результаты текущего игрока. Работает плохо
 
-      console.log(names);
-      console.log(times);
-      var indexName = names.indexOf('Вы');
-      console.log(indexName);
-      var indexResult = times[indexName];
-      console.log(indexResult);
+  console.log(names);
+  console.log(times);
+  var indexName = names.indexOf('Вы');
+  console.log(indexName);
+  // var indexResult = times[indexName];
+  // console.log(indexResult);
 
-        var swapName = names[0];
-        names[0] = names[indexName];
-        names[indexName] = swapName;
-        console.log(names[indexName]);
+  var swapName = names[0];
+  console.log(swapName);
+  names[0] = names[indexName];
+  console.log(names[indexName]);
+  names[indexName] = swapName;
+  console.log(names[indexName]);
+  console.log(names);
 
-        var swapTime = times[0];
-        times[0] = times[indexName];
-        times[indexName] = swapTime;
+  // var swapTime = times[0];
+  // times[0] = times[indexName];
+  // times[indexName] = swapTime;
 
 };
