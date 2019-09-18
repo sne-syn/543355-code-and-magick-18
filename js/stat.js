@@ -1,3 +1,5 @@
+'use strict';
+
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
@@ -17,15 +19,12 @@ var barLeftStartPoint = CLOUD_X + CHART_MARGIN;
 var cloudBottomEdge = CLOUD_Y + CLOUD_HEIGHT;
 var namesGap = GAP * 3;
 var currentPlayerColorBar = 'rgba(255, 0, 0, 1)';
-// Случайная насыщенность max = 90%, min = 10%, иначе слишком светло/темно
-var randomPlayerColorBar = 'hsl(237, 91%, ' + Math.floor(Math.random() * 80 + 10) + '%)';
 
 var renderCloud = function (ctx, x, y, color, borderColor) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
   ctx.lineWidth = 0.5;
   ctx.strokeStyle = borderColor;
-  //  повторяет координаты облакa. Как убрать дублирование?
   ctx.strokeRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
@@ -35,6 +34,21 @@ var renderGreetingText = function (ctx, text, x, y, textColor) {
   ctx.fillStyle = textColor;
   ctx.fillText(text, x, y);
 };
+
+// Перемещает в массиве результаты текущего игрока.
+
+var relocateCurrentPlayerBar = function (ctx, names, times) {
+  var indexName = names.indexOf('Вы');
+  var swapName = names[0];
+  var swapTime = times[0];
+
+  names[0] = names[indexName];
+  times[0] = times[indexName];
+  names[indexName] = swapName;
+  times[indexName] = swapTime;
+};
+
+// Находит лучший результат
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -53,17 +67,20 @@ window.renderStatistics = function (ctx, names, times) {
 
   renderGreetingText(ctx, 'Ура вы победили!', GREETING_TEXT_X, 30, TEXT_COLOR);
   renderGreetingText(ctx, 'Список результатов:', GREETING_TEXT_X, 50, TEXT_COLOR);
+  relocateCurrentPlayerBar(ctx, names, times);
 
   var maxTime = getMaxElement(times);
 
-  // Определяет цвет для столбцов
-
   for (var i = 0; i < names.length; i++) {
+
+    // Определяет цвет для столбцов
 
     if (i === 0) {
       ctx.fillStyle = currentPlayerColorBar;
     } else {
-      ctx.fillStyle = randomPlayerColorBar;
+      for (var randomBar = 1; randomBar < names.length; randomBar++) {
+        ctx.fillStyle = 'hsl(237, 91%, ' + Math.floor(Math.random() * 80 + 10) + '%)';
+      }
     }
 
     // высчитывает высоту столбцов
@@ -74,29 +91,5 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = TEXT_COLOR;
     ctx.fillText(names[i], barLeftStartPoint + barWidth * i, cloudBottomEdge - namesGap);
     ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + 60));
-
-
   }
-
-  // Перемещает в массиве результаты текущего игрока. Работает плохо
-
-  console.log(names);
-  console.log(times);
-  var indexName = names.indexOf('Вы');
-  console.log(indexName);
-  // var indexResult = times[indexName];
-  // console.log(indexResult);
-
-  var swapName = names[0];
-  console.log(swapName);
-  names[0] = names[indexName];
-  console.log(names[indexName]);
-  names[indexName] = swapName;
-  console.log(names[indexName]);
-  console.log(names);
-
-  // var swapTime = times[0];
-  // times[0] = times[indexName];
-  // times[indexName] = swapTime;
-
 };
