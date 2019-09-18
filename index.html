@@ -185,7 +185,7 @@
       return left ? 5 : 2;
     };
 
-    var wizardSpeed = 3;
+    var wizardSpeed = 10;
     var wizardWidth = 70;
     var getWizardHeight = function (wizardWidth) {
       return 1.337 * wizardWidth;
@@ -195,14 +195,13 @@
       return width - ((width + wizardWidth) / 2);
     };
 
-    // Напишите функцию так, чтобы маг появлялся на высоте две трети игрового поля от земли.
-    // height / 3 * 2 = получила 2/3 от земли, но мы не учитывали рост персонажа. В границу 2/3 он сейчас упирается головой. Прибавляем его рост => стоит ногами на 2/3
-
     var getWizardY = function (height) {
       return height - (height / 3 * 2 + getWizardHeight(wizardWidth));
     };
 
   </script>
+  <canvas id="canvas"></canvas>
+  <script src="js/stat.js"></script>
   <script src="js/game.js"></script>
 
 </body>
