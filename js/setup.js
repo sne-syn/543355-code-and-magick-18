@@ -38,7 +38,7 @@ var generateSimilarItems = function (numberOfItems, names, surnames, outfits, lo
 
 generateSimilarItems(quantityOfSimilarWizards, WIZARD_NAMES, WIZARD_SURNAMES, WIZARD_COAT_COLORS, WIZARD_EYES_COLORS, wizards);
 
-// Добавляет сгенирированных персонажей в разметку
+// Добавляет сгенерированных персонажей в разметку
 
 var addSimilarItems = function (items) {
   for (var i = 0; i < items.length; i++) {
