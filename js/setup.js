@@ -34,7 +34,7 @@ var generateSimilarItems = function (numberOfItems, names, surnames, outfits, lo
     arr.push({
       name: getRandomValue(names) + ' ' + getRandomValue(surnames),
       coatColor: getRandomValue(outfits),
-      eyesColor: getRandomValue(outfits)
+      eyesColor: getRandomValue(looks)
     });
   }
 };
