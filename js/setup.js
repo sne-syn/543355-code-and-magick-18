@@ -18,20 +18,23 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
+// Выдает случайное значение из масива
+
+var getRandomValue = function (array) {
+  var random = Math.floor(Math.random() * array.length);
+
+  return array[random];
+};
+
 //  Генерирует массив похожих персонажей
 
 var generateSimilarItems = function (numberOfItems, names, surnames, outfits, looks, arr) {
 
   for (var i = 0; i < numberOfItems; i++) {
-
-    var randomName = (names[Math.floor(Math.random() * names.length)]) + ' ' + (surnames[Math.floor(Math.random() * surnames.length)]);
-    var randomOutfit = outfits[Math.floor(Math.random() * outfits.length)];
-    var randomLook = looks[Math.floor(Math.random() * looks.length)];
-
     arr.push({
-      name: randomName,
-      coatColor: randomOutfit,
-      eyesColor: randomLook
+      name: getRandomValue(names) + ' ' + getRandomValue(surnames),
+      coatColor: getRandomValue(outfits),
+      eyesColor: getRandomValue(outfits)
     });
   }
 };
@@ -53,4 +56,3 @@ var addSimilarItems = function (items) {
 };
 
 addSimilarItems(wizards);
-
