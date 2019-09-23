@@ -18,7 +18,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
-// Выдает случайное значение из масива
+// Выдает случайное значение из массива
 
 var getRandomValue = function (array) {
   var random = Math.floor(Math.random() * array.length);
