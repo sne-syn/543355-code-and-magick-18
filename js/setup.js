@@ -8,10 +8,28 @@ var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var quantityOfSimilarWizards = 4;
 var wizards = [];
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
 
-document.querySelector('.setup-similar').classList.remove('hidden');
+// Окно .setup должно открываться по нажатию на блок .setup-open. Открытие окна производится удалением класса hidden у блока
+
+// Окно .setup должно закрываться по нажатию на элемент .setup-close, расположенный внутри окна
+var userDialog = document.querySelector('.setup');
+var openUserDialog = document.querySelector('.setup-open');
+var closeUserDialog = document.querySelector('.setup-close');
+
+openUserDialog.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  userDialog.classList.remove('hidden');
+});
+
+closeUserDialog.addEventListener('click', function () {
+  userDialog.classList.add('hidden');
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    userDialog.classList.add('hidden');
+  }
+});
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
