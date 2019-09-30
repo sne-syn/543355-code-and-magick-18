@@ -8,29 +8,6 @@ var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var quantityOfSimilarWizards = 4;
 var wizards = [];
 
-
-// Окно .setup должно открываться по нажатию на блок .setup-open. Открытие окна производится удалением класса hidden у блока
-
-// Окно .setup должно закрываться по нажатию на элемент .setup-close, расположенный внутри окна
-var userDialog = document.querySelector('.setup');
-var openUserDialog = document.querySelector('.setup-open');
-var closeUserDialog = document.querySelector('.setup-close');
-
-openUserDialog.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  userDialog.classList.remove('hidden');
-});
-
-closeUserDialog.addEventListener('click', function () {
-  userDialog.classList.add('hidden');
-});
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 27) {
-    userDialog.classList.add('hidden');
-  }
-});
-
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
@@ -74,3 +51,76 @@ var addSimilarItems = function (items) {
 };
 
 addSimilarItems(wizards);
+
+
+// Обработка событий
+
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var setupName = setup.querySelector('.setup-user-name');
+
+var onPopupEscPress = function (evt) {
+  if (setupName === document.activeElement) {
+    return evt;
+  } else if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+// Validation
+
+var userNameInput = setup.querySelector('.setup-user-name');
+userNameInput.addEventListener('invalid', function (evt) {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
+
+userNameInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else {
+    target.setCustomValidity('');
+  }
+});
