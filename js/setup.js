@@ -4,14 +4,10 @@ var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К
 var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COAT_COLORS = ['rgb (101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var WIZARD_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var quantityOfSimilarWizards = 4;
 var wizards = [];
-
-var similarListElement = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-  .content
-  .querySelector('.setup-similar-item');
 
 // Выдает случайное значение из массива
 
@@ -38,6 +34,11 @@ generateSimilarItems(quantityOfSimilarWizards, WIZARD_NAMES, WIZARD_SURNAMES, WI
 
 // Добавляет сгенерированных персонажей в разметку
 
+var similarListElement = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+  .content
+  .querySelector('.setup-similar-item');
+
 var addSimilarItems = function (items) {
   for (var i = 0; i < items.length; i++) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -51,6 +52,53 @@ var addSimilarItems = function (items) {
 };
 
 addSimilarItems(wizards);
+
+// Меняет внешний вид персонажа по клику
+
+var setupCaracter = document.querySelector('.setup-wizard');
+var setupOutfit = setupCaracter.querySelector('.wizard-coat');
+var setupLook = setupCaracter.querySelector('.wizard-eyes');
+var setupWeaponWrap = document.querySelector('.setup-fireball-wrap');
+var setupWeapon = setupWeaponWrap.querySelector('.setup-fireball');
+
+var colorIndex = 0;
+var changeColorIndex = function (array) {
+  if (colorIndex === array.length - 1) {
+    colorIndex = 0;
+  } else {
+    colorIndex++;
+  }
+};
+
+var changeOutfitColor = function (coatColors) {
+  changeColorIndex(coatColors);
+  setupOutfit.style.fill = coatColors[colorIndex];
+};
+
+var changeLookColor = function (eyesColors) {
+  changeColorIndex(eyesColors);
+  setupLook.style.fill = eyesColors[colorIndex];
+};
+
+var changeWeaponColor = function (fireballColors) {
+  changeColorIndex(fireballColors);
+  setupWeaponWrap.style.background = fireballColors[colorIndex];
+};
+
+setupOutfit.addEventListener('click', function () {
+  changeOutfitColor(WIZARD_COAT_COLORS);
+});
+
+setupLook.addEventListener('click', function () {
+  changeLookColor(WIZARD_EYES_COLORS);
+});
+
+setupWeapon.addEventListener('click', function () {
+  changeWeaponColor(WIZARD_FIREBALL_COLORS);
+});
+
+// var inputWizardEyes = document.getElementsByName('eyes-color');
+// inputWizardEyes.type = 'button';
 
 
 // Обработка событий
@@ -101,26 +149,3 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-// Validation
-
-var userNameInput = setup.querySelector('.setup-user-name');
-userNameInput.addEventListener('invalid', function (evt) {
-  if (userNameInput.validity.tooShort) {
-    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (userNameInput.validity.tooLong) {
-    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
-  } else if (userNameInput.validity.valueMissing) {
-    userNameInput.setCustomValidity('Обязательное поле');
-  } else {
-    userNameInput.setCustomValidity('');
-  }
-});
-
-userNameInput.addEventListener('input', function (evt) {
-  var target = evt.target;
-  if (target.value.length < 2) {
-    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else {
-    target.setCustomValidity('');
-  }
-});
