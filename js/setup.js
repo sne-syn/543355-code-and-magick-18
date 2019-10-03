@@ -109,11 +109,6 @@ setupWeapon.addEventListener('click', function () {
   changeWeaponColor(WIZARD_FIREBALL_COLORS);
 });
 
-
-// console.log(inputWizardEyes);
-// console.log(inputWizardEyes.value);
-
-
 // Обработка событий
 
 var ESC_KEYCODE = 27;
