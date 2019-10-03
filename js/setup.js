@@ -61,6 +61,14 @@ var setupLook = setupCaracter.querySelector('.wizard-eyes');
 var setupWeaponWrap = document.querySelector('.setup-fireball-wrap');
 var setupWeapon = setupWeaponWrap.querySelector('.setup-fireball');
 
+// var inputWizardCoat = document.getElementsByName('сoat-color');
+// var inputWizardEyes = document.getElementsByName('eyes-color');
+// var inputWizardFireball = document.getElementsByName('fireball-color');
+
+var inputWizardCoat = document.get('.coat-color-input');
+var inputWizardEyes = document.querySelector('.eyes-color-input');
+var inputWizardFireball = document.querySelector('.fireball-color-input');
+
 var colorIndex = 0;
 var changeColorIndex = function (array) {
   if (colorIndex === array.length - 1) {
@@ -73,16 +81,19 @@ var changeColorIndex = function (array) {
 var changeOutfitColor = function (coatColors) {
   changeColorIndex(coatColors);
   setupOutfit.style.fill = coatColors[colorIndex];
+  inputWizardCoat.value = coatColors[colorIndex];
 };
 
 var changeLookColor = function (eyesColors) {
   changeColorIndex(eyesColors);
   setupLook.style.fill = eyesColors[colorIndex];
+  inputWizardEyes.value = eyesColors[colorIndex];
 };
 
 var changeWeaponColor = function (fireballColors) {
   changeColorIndex(fireballColors);
   setupWeaponWrap.style.background = fireballColors[colorIndex];
+  inputWizardFireball.value = fireballColors[colorIndex];
 };
 
 setupOutfit.addEventListener('click', function () {
@@ -91,14 +102,16 @@ setupOutfit.addEventListener('click', function () {
 
 setupLook.addEventListener('click', function () {
   changeLookColor(WIZARD_EYES_COLORS);
+
 });
 
 setupWeapon.addEventListener('click', function () {
   changeWeaponColor(WIZARD_FIREBALL_COLORS);
 });
 
-// var inputWizardEyes = document.getElementsByName('eyes-color');
-// inputWizardEyes.type = 'button';
+
+// console.log(inputWizardEyes);
+// console.log(inputWizardEyes.value);
 
 
 // Обработка событий
@@ -116,6 +129,7 @@ var onPopupEscPress = function (evt) {
     return evt;
   } else if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
+    return;
   }
 };
 
@@ -148,4 +162,3 @@ setupClose.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
-
