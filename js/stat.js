@@ -83,7 +83,7 @@ window.renderStatistics = function (ctx, names, times) {
       }
     }
 
-    // высчитывает высоту столбцов
+    // Вычисляет высоту столбцов
 
     var barHeightCalculated = BAR_HEIGHT * times[i] / maxTime;
 
