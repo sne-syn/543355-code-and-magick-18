@@ -65,9 +65,9 @@ var setupWeapon = setupWeaponWrap.querySelector('.setup-fireball');
 // var inputWizardEyes = document.getElementsByName('eyes-color');
 // var inputWizardFireball = document.getElementsByName('fireball-color');
 
-var inputWizardCoat = document.get('.coat-color-input');
-var inputWizardEyes = document.querySelector('.eyes-color-input');
-var inputWizardFireball = document.querySelector('.fireball-color-input');
+var inputWizardCoat = document.querySelector('input[name="coat-color"]');
+var inputWizardEyes = document.querySelector('input[name="eyes-color"]');
+var inputWizardFireball = document.querySelector('input[name="fireball-color"]');
 
 var colorIndex = 0;
 var changeColorIndex = function (array) {
