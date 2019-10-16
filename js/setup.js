@@ -16,17 +16,6 @@
     }
   };
 
-  var openPopup = function () {
-    setup.classList.remove('hidden');
-    similarWizards.classList.remove('hidden');
-    document.addEventListener('keydown', onPopupEscPress);
-  };
-
-  var closePopup = function () {
-    setup.classList.add('hidden');
-    document.removeEventListener('keydown', onPopupEscPress);
-  };
-
   setupOpen.addEventListener('click', function () {
     openPopup();
   });
@@ -42,4 +31,15 @@
   setupClose.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, closePopup);
   });
+
+  var openPopup = function () {
+    setup.classList.remove('hidden');
+    similarWizards.classList.remove('hidden');
+    document.addEventListener('keydown', onPopupEscPress);
+  };
+
+  var closePopup = function () {
+    setup.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscPress);
+  };
 })();
