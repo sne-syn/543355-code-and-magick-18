@@ -67,7 +67,8 @@
   </header>
 
   <div class="overlay setup hidden">
-    <form class="setup-wizard-form" method="post" enctype="multipart/form-data" action="https://js.dump.academy/code-and-magick" autocomplete="off">
+    <form class="setup-wizard-form" method="post" enctype="multipart/form-data"
+      action="https://js.dump.academy/code-and-magick" autocomplete="off">
 
       <div class="setup-title">
         <div class="setup-user">
@@ -76,7 +77,8 @@
             <input type="file" name="avatar">
           </div>
           <label>
-            <input type="text" name="username" minlength="2" maxlength="25" required class="setup-user-name" value="Синий Пендальф" />
+            <input type="text" name="username" minlength="2" maxlength="25" required class="setup-user-name"
+              value="Синий Пендальф" />
           </label>
         </div>
 
@@ -105,8 +107,8 @@
               <g class="wizard">
                 <use xlink:href="#wizard-coat" class="wizard-coat" style="fill: #6589a4"></use>
                 <use xlink:href="#wizard-head" class="wizard-head"></use>
-                <use xlink:href="#wizard-eyes" class="wizard-eyes" ></use>
-                <use xlink:href="#wizard-hands" class="wizard-hands" ></use>
+                <use xlink:href="#wizard-eyes" class="wizard-eyes"></use>
+                <use xlink:href="#wizard-hands" class="wizard-hands"></use>
               </g>
             </svg>
           </div>
@@ -184,7 +186,7 @@
       return left ? 5 : 2;
     };
 
-    var wizardSpeed = 10;
+    var wizardSpeed = 5;
     var wizardWidth = 70;
     var getWizardHeight = function (wizardWidth) {
       return 1.337 * wizardWidth;
@@ -197,16 +199,17 @@
     var getWizardY = function (height) {
       return height - (height / 3 * 2 + getWizardHeight(wizardWidth));
     };
-
   </script>
+
   <canvas id="canvas"></canvas>
-  <script src="js/wizard-data.js"></script>
+  <script src="js/wizard-map.js"></script>
   <script src="js/util.js"></script>
-  <script src="js/setup.js"></script>
   <script src="js/dialog.js"></script>
   <script src="js/colorize.js"></script>
+  <script src="js/similar-items.js"></script>
   <script src="js/game.js"></script>
   <script src="js/stat.js"></script>
-
+  <script src="js/setup.js"></script>
 </body>
+
 </html>

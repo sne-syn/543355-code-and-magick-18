@@ -1,7 +1,5 @@
 'use strict';
 
-// Перемещение окна с настройками
-
 (function () {
 
   var setupDialogElement = document.querySelector('.setup');

@@ -1,65 +1,29 @@
 'use strict';
 
-// Меняет внешний вид персонажа по клику
 (function () {
-  var setupFireball = document.querySelector('.setup-fireball-wrap');
-  var setupCaracter = document.querySelector('.setup-wizard');
-  var setupCoat = setupCaracter.querySelector('.wizard-coat');
-  var setupEyes = setupCaracter.querySelector('.wizard-eyes');
 
-
-  var inputWizardCoat = document.querySelector('input[name="coat-color"]');
-  var inputWizardEyes = document.querySelector('input[name="eyes-color"]');
-  var inputWizardFireball = document.querySelector('input[name="fireball-color"]');
-
-  var wizardMap = {
-
-    'names': {
-      'name': ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
-      'surname': ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг']
-    },
-
-    'coat': {
-      'input': inputWizardCoat,
-      'block': setupCoat,
-      'array': ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)']
-    },
-
-    'eyes': {
-      'input': inputWizardEyes,
-      'block': setupEyes,
-      'array': ['black', 'red', 'blue', 'yellow', 'green']
-    },
-
-    'fireball': {
-      'input': inputWizardFireball,
-      'block': setupFireball,
-      'array': ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
-    }
-  };
-
-  var colorIndex = 0;
-  var changeColor = function (array) {
-    if (colorIndex === array.length - 1) {
-      colorIndex = 0;
+  var index = 0;
+  var getArrayLoop = function (array) {
+    if (index === array.length - 1) {
+      index = 0;
     } else {
-      colorIndex++;
+      index++;
     }
   };
 
   var colorize = function (element) {
     element.block.addEventListener('click', function () {
-      changeColor(element.array);
+      getArrayLoop(element.color);
       if (element.block.tagName.toLowerCase() === 'div') {
-        element.block.style.background = element.array[colorIndex];
+        element.block.style.background = element.color[index];
       } else {
-        element.block.style.fill = element.array[colorIndex];
+        element.block.style.fill = element.color[index];
       }
-      element.input.value = element.array[colorIndex];
+      element.input.value = element.color[index];
     });
   };
 
-  colorize(wizardMap.coat);
-  colorize(wizardMap.eyes);
-  colorize(wizardMap.fireball);
+  colorize(window.wizardMap.coat);
+  colorize(window.wizardMap.eyes);
+  colorize(window.wizardMap.fireball);
 })();
