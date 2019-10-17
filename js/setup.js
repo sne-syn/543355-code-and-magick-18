@@ -29,7 +29,7 @@
   });
 
   setupClose.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, closePopup);
+    window.util.isEscEvent(evt, closePopup);
   });
 
   var openPopup = function () {
