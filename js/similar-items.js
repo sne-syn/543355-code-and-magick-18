@@ -1,31 +1,16 @@
 'use strict';
 
 (function () {
-  var quantityOfSimilarWizards = 4;
-  var wizards = [];
+  var countWizards = 4;
+  var setup = document.querySelector('.setup');
 
-  // Выдает случайное значение из массива
+  // // Выдает случайное значение из массива
 
   var getRandomValue = function (array) {
     var random = Math.floor(Math.random() * array.length);
 
     return array[random];
   };
-
-  //  Генерирует массив похожих персонажей
-
-  var generateSimilarItems = function (numberOfItems, names, surnames, outfits, looks, arr) {
-
-    for (var i = 0; i < numberOfItems; i++) {
-      arr.push({
-        name: getRandomValue(names) + ' ' + getRandomValue(surnames),
-        coatColor: getRandomValue(outfits),
-        eyesColor: getRandomValue(looks)
-      });
-    }
-  };
-
-  generateSimilarItems(quantityOfSimilarWizards, window.wizardMap.name.names, window.wizardMap.name.surnames, window.wizardMap.coat.color, window.wizardMap.eyes.color, wizards);
 
   // Добавляет сгенерированных персонажей в разметку
 
@@ -34,17 +19,23 @@
     .content
     .querySelector('.setup-similar-item');
 
-  var addSimilarItems = function (items) {
-    for (var i = 0; i < items.length; i++) {
+  var addSimilarItems = function (wizard) {
       var wizardElement = similarWizardTemplate.cloneNode(true);
 
-      wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-      wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-      wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+      wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+      wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+      wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
-      similarListElement.appendChild(wizardElement);
-    }
+      return wizardElement;
+
   };
 
-  addSimilarItems(wizards);
+  window.backend.load(function (wizards) {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < countWizards; i++) {
+      fragment.appendChild(addSimilarItems(getRandomValue(wizards)));
+    }
+    similarListElement.appendChild(fragment);
+    setup.querySelector('.setup-similar').classList.remove('hidden');
+  });
 })();
