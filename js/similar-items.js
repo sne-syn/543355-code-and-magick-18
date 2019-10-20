@@ -47,5 +47,4 @@
 
 
   window.backend.setServerInteraction(successHandler, errorHandler);
-
 })();

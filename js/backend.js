@@ -4,10 +4,10 @@
   var OK_STATUS_CODE = 200;
   var urlGet = 'https://js.dump.academy/code-and-magick/data';
   var urlPost = 'https://js.dump.academy/code-and-magick';
-  var timeOutLimit = 1000; // 10s
+  var timeOutLimit = 10000; // 10s
 
   window.backend = {
-    'setServerInteraction': function (onLoad, onError, data) {
+    setServerInteraction: function (onLoad, onError, data) {
 
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
