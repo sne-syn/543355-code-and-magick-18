@@ -4,15 +4,10 @@
   var countWizards = 4;
   var setup = document.querySelector('.setup');
 
-  // // Выдает случайное значение из массива
-
   var getRandomValue = function (array) {
     var random = Math.floor(Math.random() * array.length);
-
     return array[random];
   };
-
-  // Добавляет сгенерированных персонажей в разметку
 
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -27,7 +22,6 @@
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
     return wizardElement;
-
   };
 
   var successHandler = function (wizards) {
@@ -46,5 +40,5 @@
   };
 
 
-  window.backend.setServerInteraction(successHandler, errorHandler);
+  window.backend.load(successHandler, errorHandler);
 })();
