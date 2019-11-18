@@ -35,8 +35,6 @@
     ctx.fillText(text, x, y);
   };
 
-  // Перемещает в массиве результаты текущего игрока.
-
   var relocateCurrentPlayerBar = function (ctx, names, times) {
     var indexName = names.indexOf('Вы');
     var swapName = names[0];
@@ -61,7 +59,7 @@
     return maxElement;
   };
 
-  window.renderStatistics = function (ctx, names, times) {
+  var renderStatistics = function (ctx, names, times) {
     renderCloud(ctx, CLOUD_X + SHADOW_GAP, CLOUD_Y + SHADOW_GAP, 'rgba(0, 0, 0, 0.7)', BORDER_COLOR);
     renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff', BORDER_COLOR);
 
@@ -92,5 +90,9 @@
       ctx.fillText(names[i], barLeftStartPoint + barWidth * i, cloudBottomEdge - namesGap);
       ctx.fillText(Math.round(times[i]), barLeftStartPoint + barWidth * i, cloudBottomEdge - (barHeightCalculated + 60));
     }
+  };
+
+  window.stat = {
+    renderStatistics: renderStatistics
   };
 })();
