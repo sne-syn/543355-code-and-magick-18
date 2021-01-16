@@ -2,7 +2,7 @@
 
 (function () {
   var OK_STATUS_CODE = 200;
-  var urlPost = 'https://js.dump.academy/code-and-magick';
+  var urlPost = 'https://javascript.pages.academy/code-and-magick';
   var timeOutLimit = 10000;
 
   var load = function (onLoad, onError, url) {
