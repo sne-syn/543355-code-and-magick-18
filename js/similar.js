@@ -51,6 +51,6 @@
     window.setup.addErrorBox(errorMessage);
   };
 
-  var urlGet = 'https://js.dump.academy/code-and-magick/data';
+  var urlGet = 'https://javascript.pages.academy/code-and-magick/data';
   window.backend.load(successHandler, errorHandler, urlGet);
 })();
